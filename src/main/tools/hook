@@ -1,0 +1,14 @@
+#!/bin/sh
+
+export ENTITY_DIR=$4
+export CHARM_DIR=$ENTITY_DIR/charm
+export PATH=$ENTITY_DIR/tools:$PATH
+export JUJU_UNIT_NAME=brooklyn/$2
+export JUJU_RELATION=$1
+export JUJU_RELATION_ID=$1
+export JUJU_REMOTE_UNIT=$3
+# echo > /tmp/relation-local.txt
+cd $CHARM_DIR
+$CHARM_DIR/hooks/$1
+# echo -------------------------------------------------------------
+# cat /tmp/relation-local.txt

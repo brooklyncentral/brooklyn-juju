@@ -1,0 +1,7 @@
+services:
+- name: MySQL
+  type: brooklyn.juju.JujuEntity
+  charmUrl: http://bazaar.launchpad.net/~charmers/charms/trusty/mysql/trunk
+  brooklyn.config:
+    install.unique_label: mysql
+

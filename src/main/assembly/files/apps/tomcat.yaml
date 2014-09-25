@@ -1,0 +1,6 @@
+services:
+- name: Tomcat
+  type: brooklyn.juju.JujuEntity
+  charmUrl: http://bazaar.launchpad.net/~charmers/charms/trusty/tomcat/trunk
+  brooklyn.config:
+    install.unique_label: tomcat

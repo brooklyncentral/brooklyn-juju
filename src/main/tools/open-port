@@ -1,0 +1,3 @@
+#!/bin/sh
+
+echo open-port: Open port $1/$2

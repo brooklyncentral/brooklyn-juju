@@ -1,0 +1,56 @@
+#!/usr/bin/python
+
+import sys
+import os
+import yaml
+import optparse
+
+def main(argv=None):
+    parser = optparse.OptionParser()
+    parser.add_option('--format', dest='format', action='store')
+    
+    (opts, args) = parser.parse_args()
+
+    charm_dir = os.getenv('CHARM_DIR')
+    configPath = os.path.join(charm_dir, 'config.yaml')
+    configFile = open(configPath, 'r')
+    config = yaml.load(configFile)
+    
+    if len(args) == 1:
+      name=args[0]
+      value = config['options'][name]['default']
+      type = config['options'][name]['type']
+  
+      if opts.format == "json":
+        if type == "string":
+          print '"' + xstr(value) + '"'
+        elif type == 'boolean':
+          print 'true' if value else 'false'
+        else:
+          print value
+      else:
+        print value
+
+    if len(args) == 0:
+      print "{"
+      for name in config['options']:
+        value = config['options'][name]['default']
+        type = config['options'][name]['type']
+  
+        if opts.format == "json":
+          if type == "string":
+            print '"' + name + '":"' + xstr(value) + '",'
+          elif type == 'boolean':
+            print '"' + name + '":' + ('true,' if value else 'false,')
+          else:
+            print '"' + name + '":' + xstr(value) + ','
+        else:
+          print name + "=" + xstr(value) + ','
+      print '"dummy":"comma_tailer"}'
+
+def xstr(s):
+    if s is None:
+        return ''
+    return str(s)
+    
+main()

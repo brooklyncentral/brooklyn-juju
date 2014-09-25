@@ -1,0 +1,7 @@
+services:
+- name: MongoDB
+  type: brooklyn.juju.JujuEntity
+  charmUrl: http://bazaar.launchpad.net/~charmers/charms/trusty/mongodb/trunk
+  brooklyn.config:
+    install.unique_label: mongo
+

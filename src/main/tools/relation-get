@@ -1,0 +1,21 @@
+#!/usr/bin/python
+
+import sys
+import os
+import yaml
+
+def main(argv=None):
+    if argv is None:
+        argv = sys.argv
+
+	charm_dir = os.getenv('CHARM_DIR')
+	configPath = "/tmp/settings-" + os.getenv('JUJU_REMOTE_UNIT')+ ".txt"
+	print "Reading relation from " + configPath 
+	configFile = open(configPath, 'r')
+	config = yaml.load(configFile)
+	
+	if config is not None:
+		name=argv[1]
+		print config[name]
+
+main()
